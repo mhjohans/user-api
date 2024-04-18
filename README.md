@@ -57,9 +57,6 @@ The REST API can then be accessed at http://localhost:8080/user-api/users.
 
 **NOTE:** The application requires a running MongoDB instance at localhost:27017.
 
-### Running the application with Docker
-To run the application with Docker, it is recommended to use the Dockerfile located in the root of the project.
-
 ### Running a local MongoDB instance with Docker
 To run a local MongoDB instance with Docker, the following commands can be used:
 ```bash

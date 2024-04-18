@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import mhjohans.userapi.model.User;
-import mhjohans.userapi.repository.UserRepository;
+import repository.UserRepository;
 
 @Service
 public class UserService {
@@ -36,12 +36,12 @@ public class UserService {
     }
 
     public User createUser(User user) {
-        List<User> users = userRepository.findAll();
-        int id = findFirstAvailableId(users);
+        int id = generateNewId();
         return userRepository.save(new User(user, id));
     }
 
-    private int findFirstAvailableId(List<User> users) {
+    private int generateNewId() {
+        List<User> users = userRepository.findAll();
         Set<Integer> existingIds = users.stream().map(User::id).collect(Collectors.toCollection(HashSet::new));
         for (int i = 1; i <= Integer.MAX_VALUE; i++) {
             if (!existingIds.contains(i)) {

@@ -1,11 +1,13 @@
 package mhjohans.userapi.model;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document(collection = "users")
 public record User(@Id int id, String name, String username, String email, Address address, String phone, String website, Company company) {
 
     /**
-     * Create a new User object from an existing User object and a custom ID
+     * Create a new User from an existing User and a custom ID
      * 
      * @param user existing User object
      * @param id custom ID

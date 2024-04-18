@@ -1,4 +1,4 @@
-package mhjohans.userapi.repository;
+package repository;
 
 import java.util.List;
 
@@ -11,11 +11,11 @@ import mhjohans.userapi.model.User;
 public interface UserRepository extends MongoRepository<User, Integer> {
 
   /**
-   * Finds all User objects with a name that exactly matches the input parameter
+   * Finds all Users with a name that exactly matches the input parameter
    * 
    * @param name The name to search for
    * 
-   * @return A list of User objects with a name that exactly matches the search parameter
+   * @return A list of Users with a name that exactly matches the search parameter
    */
   public List<User> findByName(String name);
 
