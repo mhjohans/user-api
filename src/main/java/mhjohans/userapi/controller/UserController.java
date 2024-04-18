@@ -1,8 +1,11 @@
-package mhjohans.userapi;
+package mhjohans.userapi.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import mhjohans.userapi.model.User;
+import mhjohans.userapi.service.UserService;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +18,7 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/{id}")
-    public User getUserById(@PathVariable Integer id) {
+    public User getUserById(@PathVariable int id) {
         return userService.getUserById(id);
     }
 
@@ -35,12 +38,12 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public User updateUser(@PathVariable Integer id, @RequestBody User user) {
+    public User updateUser(@PathVariable int id, @RequestBody User user) {
         return userService.updateUser(id, user);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable Integer id) {
+    public void deleteUser(@PathVariable int id) {
         userService.deleteUser(id);
     }
 
