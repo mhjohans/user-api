@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import mhjohans.userapi.model.User;
-import repository.UserRepository;
+import mhjohans.userapi.repository.UserRepository;
 
 @Service
 public class UserService {

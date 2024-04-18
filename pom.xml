@@ -12,7 +12,7 @@
 	<artifactId>user-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>user-api</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Example of a Spring Boot based REST API back-end for handling users</description>
 	<properties>
 		<java.version>21</java.version>
 	</properties>

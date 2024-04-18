@@ -1,4 +1,4 @@
-package repository;
+package mhjohans.userapi.repository;
 
 import java.util.List;
 
