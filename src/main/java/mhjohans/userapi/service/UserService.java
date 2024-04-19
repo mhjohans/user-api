@@ -1,16 +1,12 @@
 package mhjohans.userapi.service;
 
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
+import mhjohans.userapi.model.User;
+import mhjohans.userapi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import mhjohans.userapi.model.User;
-import repository.UserRepository;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -41,8 +37,7 @@ public class UserService {
     }
 
     private int generateNewId() {
-        List<User> users = userRepository.findAll();
-        Set<Integer> existingIds = users.stream().map(User::id).collect(Collectors.toCollection(HashSet::new));
+        Set<Integer> existingIds = getExistingIds();
         for (int i = 1; i <= Integer.MAX_VALUE; i++) {
             if (!existingIds.contains(i)) {
                 return i;
@@ -50,9 +45,17 @@ public class UserService {
         }
         throw new IllegalStateException("No available IDs.");
     }
-    
-    public User updateUser(int id, User user) {
-        return userRepository.save(new User(user, id));
+
+    private HashSet<Integer> getExistingIds() {
+        List<User> users = userRepository.findAll();
+        return users.stream().map(User::id).collect(Collectors.toCollection(HashSet::new));
+    }
+
+    public Optional<User> updateUser(int id, User user) {
+        if (getExistingIds().contains(id)) {
+            return Optional.of(userRepository.save(new User(user, id)));
+        }
+        return Optional.empty();
     }
 
     public void deleteUser(int id) {
