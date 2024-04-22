@@ -18,7 +18,7 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/{id}")
-    public User getUserById(@PathVariable int id) {
+    public User getUserById(@PathVariable long id) {
         return userService.getUserById(id);
     }
 
@@ -38,12 +38,12 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public User updateUser(@PathVariable int id, @RequestBody User user) {
-        return userService.updateUser(id, user).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User with id " + id + " does not exist"));
+    public User updateUser(@PathVariable long id, @RequestBody User user) {
+        return userService.updateUser(id, user).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User with ID " + id + " does not exist"));
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable int id) {
+    public void deleteUser(@PathVariable long id) {
         userService.deleteUser(id);
     }
 

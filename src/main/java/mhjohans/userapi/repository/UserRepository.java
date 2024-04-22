@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface UserRepository extends MongoRepository<User, Integer> {
+public interface UserRepository extends MongoRepository<User, Long> {
 
     /**
      * Finds all Users with a name that exactly matches the given name parameter

@@ -18,7 +18,7 @@ public class UserService {
         return sortUsers(userRepository.findAll());
     }
 
-    public User getUserById(int id) {
+    public User getUserById(long id) {
         return userRepository.findById(id).orElse(null);
     }
 
@@ -27,18 +27,18 @@ public class UserService {
     }
 
     private List<User> sortUsers(List<User> users) {
-        users.sort(Comparator.comparingInt(User::id));
+        users.sort(Comparator.comparingLong(User::id));
         return users;
     }
 
     public User createUser(User user) {
-        int id = generateNewId();
+        long id = generateNewId();
         return userRepository.save(new User(user, id));
     }
 
-    private int generateNewId() {
-        Set<Integer> existingIds = getExistingIds();
-        for (int i = 1; i <= Integer.MAX_VALUE; i++) {
+    private long generateNewId() {
+        Set<Long> existingIds = getExistingIds();
+        for (long i = 1; i < Long.MAX_VALUE; i++) {
             if (!existingIds.contains(i)) {
                 return i;
             }
@@ -46,19 +46,19 @@ public class UserService {
         throw new IllegalStateException("No available IDs.");
     }
 
-    private HashSet<Integer> getExistingIds() {
+    private HashSet<Long> getExistingIds() {
         List<User> users = userRepository.findAll();
         return users.stream().map(User::id).collect(Collectors.toCollection(HashSet::new));
     }
 
-    public Optional<User> updateUser(int id, User user) {
+    public Optional<User> updateUser(long id, User user) {
         if (getExistingIds().contains(id)) {
             return Optional.of(userRepository.save(new User(user, id)));
         }
         return Optional.empty();
     }
 
-    public void deleteUser(int id) {
+    public void deleteUser(long id) {
         userRepository.deleteById(id);
     }
 
